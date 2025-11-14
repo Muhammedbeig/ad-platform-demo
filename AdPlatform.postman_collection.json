@@ -1,0 +1,280 @@
+{
+	"info": {
+		"_postman_id": "a1b2c3d4-e5f6-a7b8-c9d0-e1f2a3b4c5d6",
+		"name": "AdPlatform API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json"
+	},
+	"item": [
+		{
+			"name": "Authentication",
+			"item": [
+				{
+					"name": "Sign Up (Register User)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"Test User\",\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/register",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"register"
+							]
+						},
+						"description": "Creates a new user. Triggers a verification email."
+					},
+					"response": []
+				},
+				{
+					"name": "Check User (Before Login)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password123\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/check-user",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"check-user"
+							]
+						},
+						"description": "Checks if a user is valid, verified, and has the correct password before attempting a NextAuth sign-in."
+					},
+					"response": []
+				},
+				{
+					"name": "Verify Email (Manual)",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"token\": \"paste_token_from_email_link_here\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/verify-email",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"verify-email"
+							]
+						},
+						"description": "This is the endpoint the /verify-email page calls. You can use this to manually verify a user if needed."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "Ads",
+			"item": [
+				{
+					"name": "Create New Ad",
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "title",
+									"value": "My Awesome Product",
+									"type": "text"
+								},
+								{
+									"key": "description",
+									"value": "This is a great product, you should buy it.",
+									"type": "text"
+								},
+								{
+									"key": "price",
+									"value": "99.99",
+									"type": "text"
+								},
+								{
+									"key": "category",
+									"value": "ELECTRONICS",
+									"type": "text"
+								},
+								{
+									"key": "subCategory",
+									"value": "PHONES",
+									"type": "text"
+								},
+								{
+									"key": "hashtags",
+									"value": "#product #sale #awesome",
+									"type": "text"
+								},
+								{
+									"key": "aiImageUrl",
+									"value": "/uploads/ai-placeholder-iphone.jpg",
+									"type": "text"
+								},
+								{
+									"key": "media",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/ads",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"ads"
+							]
+						},
+						"description": "Creates a new ad. This request requires you to be logged in. \n\n**Note:** You must run this from the Postman desktop app (not web) and have your browser logged into the app on localhost:3000. Postman will borrow your browser's session cookie."
+					},
+					"response": []
+				},
+				{
+					"name": "Delete Ad",
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{BASE_URL}}/api/ads/{{adId}}",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"ads",
+								"{{adId}}"
+							]
+						},
+						"description": "Deletes an ad by its ID. Requires you to be logged in as the ad's author.\n\n**Note:** You must run this from the Postman desktop app (not web) and have your browser logged into the app on localhost:3000. Postman will borrow your browser's session cookie."
+					},
+					"response": []
+				}
+			]
+		},
+		{
+			"name": "AI Helpers",
+			"item": [
+				{
+					"name": "Generate Content",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Vintage Leather Jacket\",\n    \"description\": \"Old brown jacket. Good condition.\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/ai/content",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"ai",
+								"content"
+							]
+						},
+						"description": "Uses Gemini to enhance a title and generate a description + hashtags."
+					},
+					"response": []
+				},
+				{
+					"name": "Generate Image",
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Content-Type",
+								"value": "application/json"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"title\": \"Vintage Leather Jacket\"\n}"
+						},
+						"url": {
+							"raw": "{{BASE_URL}}/api/ai/image",
+							"host": [
+								"{{BASE_URL}}"
+							],
+							"path": [
+								"api",
+								"ai",
+								"image"
+							]
+						},
+						"description": "Uses Imagen/Clipdrop to generate an AI thumbnail/banner."
+					},
+					"response": []
+				}
+			]
+		}
+	],
+	"event": [
+		{
+			"listen": "prerequest",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		},
+		{
+			"listen": "test",
+			"script": {
+				"type": "text/javascript",
+				"exec": [
+					""
+				]
+			}
+		}
+	],
+	"variable": [
+		{
+			"key": "BASE_URL",
+			"value": "http://localhost:3000"
+		},
+		{
+			"key": "adId",
+			"value": "paste_ad_id_here"
+		}
+	]
+}
