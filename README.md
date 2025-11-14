@@ -1,103 +1,218 @@
-# AdPlatform - Full-Stack AI-Powered Marketplace
+# AdPlatform
 
-AdPlatform is a modern, full-stack web application that allows users to create, view, and enhance advertisement posts with generative AI. It is a feature-rich platform demonstrating a complete, production-ready workflow from user authentication to AI content generation and social media integration.
+A full-stack AI-powered marketplace for creating, managing, and enhancing advertisement posts with intelligent content generation.
 
-## 🎬 Live Demo Video
+## Overview
 
-A short video demonstrating the live, running product:
+AdPlatform is a production-ready web application that combines modern web technologies with generative AI to streamline the ad creation process. Users can authenticate, create posts, and leverage AI to enhance their content with optimized titles, descriptions, hashtags, and custom-generated imagery.
 
-**[Watch the Full Demo on Google Drive](https://drive.google.com/file/d/1Nqyk5QjppxGTPtq7SRDob4487VvLOHS1/view?usp=sharing)**
+## Demo
 
----
+**[View Live Demo Video](https://drive.google.com/file/d/1Nqyk5QjppxGTPtq7SRDob4487VvLOHS1/view?usp=sharing)**
 
-## 📸 Screenshots
+## Screenshots
 
-### Main Ad Feed
-The main page displays a clean, scrollable feed of all user-posted ads, sorted by newest first.
-![Main Ad Feed](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%201.png)
+| Main Feed | AI Enhancement | Final Post |
+|-----------|----------------|------------|
+| ![Feed](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%201.jpg) | ![Creation](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%202.png) | ![Post](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%203.jpg) |
 
-### AI-Powered Ad Creation
-A modal form allows users to create new ads, with on-demand AI features to enhance their post.
-![AI-Powered Ad Creation](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%202.png)
+The platform features a clean, intuitive interface with real-time AI content generation and seamless post management.
 
-### Final Post Example
-A finished post showing the user's image, AI-enhanced title, AI-generated description, and AI-generated hashtags.
-![Final Post Example](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%203.png)
+## Features
 
----
+### Authentication & Security
+- **Multi-provider authentication** via NextAuth.js v5
+  - Email/password with secure hashing
+  - Google OAuth 2.0 integration
+- **Email verification** using Resend
+- **Protected API routes** with granular error messaging
+- **Session-based authorization** for all sensitive operations
 
-## ✨ Core Features
+### Content Management
+- **Dynamic ad feed** with real-time updates
+- **Rich post creation** supporting:
+  - Text content (title, description)
+  - Media uploads
+  - Price specifications
+  - Category/sub-category organization
+- **Ownership-based deletion** with automatic media cleanup
+- **Chronological sorting** (newest first)
 
-### 1. Authentication
-* **Email & Password:** Full sign-up and login flow.
-* **Google Sign-In:** OAuth 2.0 integration.
-* **Custom Email Verification:** Users receive a verification link via Resend before they can log in.
-* **Protected Routes:** Custom API route (`/api/check-user`) provides specific login error messages (e.g., "Email not verified", "No user found").
+### AI-Powered Features
+- **Content Enhancement** (Google Gemini 2.5 Flash)
+  - Optimized ad titles
+  - Professional descriptions
+  - Relevant hashtag generation
+- **Image Generation** (Google Imagen API)
+  - Custom thumbnail creation
+  - Intelligent fallback system
+  - Automatic storage integration
 
-### 2. Ad Feed & Post Creation
-* **Dynamic Feed:** The main page fetches all ads from the PostgreSQL database and displays them in a scrollable feed, sorted by newest.
-* **Create Post:** A modal form allows users to post new ads with a title, description, price, media, and categories/sub-categories.
-* **Delete Post:** Logged-in users can delete their own posts. This securely checks for ownership on the backend and also removes all associated media from storage.
+### Social Integration
+- **Automated webhook distribution** to simulated platforms
+  - WhatsApp integration endpoint
+  - Facebook integration endpoint
+- Fire-and-forget architecture for non-blocking operations
 
-### 3. Generative AI Features
-* **On-Demand Content Generation:** An "Enhance with AI" button uses the Google Gemini API (`gemini-2.5-flash`) to enhance the ad title, generate a new description, and create relevant hashtags.
-* **On-Demand Image Generation:** A "Generate AI Thumbnail" button uses the Google Imagen API (via Vercel AI SDK) to generate a relevant banner image for the post, which is then saved to local storage.
-* **Smart Fallback:** If the AI image generation fails (e.g., due to billing/permissions), a relevant placeholder image is fetched and used.
+### Developer Experience
+- **Comprehensive error handling** with user-friendly messages
+- **Loading states** for all async operations
+- **API documentation** via Postman collection
+- **Type-safe database** operations with Prisma
 
-### 4. Social Media Integration
-* **Mock Webhooks:** After an ad is successfully created, a "fire-and-forget" function sends the ad data to mock API endpoints (`/api/webhooks/whatsapp` and `/api/webhooks/facebook`), simulating a social media share.
+## Technology Stack
 
-### 5. Professional Standards
-* **Loading & Error Handling:** All forms and API calls feature loading spinners and display clear, user-friendly error messages (e.g., "Model is overloaded," "Billing limit reached").
-* **API Documentation:** The repository includes a `AdPlatform.postman_collection.json` file for complete API documentation and testing.
+| Layer | Technology |
+|-------|-----------|
+| **Frontend** | Next.js 14+ (App Router), React, Tailwind CSS |
+| **Backend** | Next.js API Routes, Node.js |
+| **Database** | PostgreSQL + Prisma ORM |
+| **Authentication** | NextAuth.js v5 (Auth.js) |
+| **File Storage** | Local filesystem (`/public/uploads`) |
+| **AI Services** | Google Gemini, Google Imagen (via Vercel AI SDK) |
+| **Email** | Resend |
 
----
+## Getting Started
 
-## 💻 Tech Stack
+### Prerequisites
 
-* **Frontend:** Next.js 14+ (App Router), React, Tailwind CSS
-* **Backend:** Next.js (API Routes), Node.js
-* **Database:** PostgreSQL with Prisma
-* **Authentication:** NextAuth.js v5 (Auth.js)
-* **Storage:** Local File System (`/public/uploads`)
-* **AI (Text):** Google Gemini (via Vercel AI SDK)
-* **AI (Image):** Google Imagen (via Vercel AI SDK)
-* **Email:** Resend
+- Node.js 18 or higher
+- PostgreSQL database
+- Postman Desktop App (for API testing)
 
----
+### Installation
 
-## 🚀 How to Run This Project
-
-### 1. Prerequisites
-- Node.js (v18+)
-- PostgreSQL
-- Postman (for testing API)
-
-### 2. Installation
-1.  **Clone the repository:**
-    ```bash
-    git clone [https://github.com/Muhammedbeig/ad-platform-demo.git](https://github.com/Muhammedbeig/ad-platform-demo.git)
-    cd ad-platform-demo
-    ```
-
-2.  **Install dependencies:**
-    ```bash
-    npm install
-    ```
-
-### 3. Environment Setup
-1.  **Create your database:** Create a new PostgreSQL database (e.g., `my_ad_db`).
-2.  **Set up environment variables:** Copy the `.env.example` file to a new file named `.env` and fill in all the required API keys.
-    ```bash
-    cp .env.example .env
-    ```
-    You will need keys for:
-    - `DATABASE_URL`
-    - Google OAuth (`GOOGLE_CLIENT_ID`, `GOOGLE_CLIENT_SECRET`)
-    - Resend (`RESEND_API_KEY`)
-    - Google AI (`GOOGLE_GENERATIVE_AI_API_KEY`)
-
-### 4. Run Database Migrations
-Run the following command to sync your database schema:
 ```bash
+# Clone the repository
+git clone https://github.com/Muhammedbeig/ad-platform-demo.git
+cd ad-platform-demo
+
+# Install dependencies
+npm install
+```
+
+### Configuration
+
+1. **Create PostgreSQL database**
+   ```sql
+   CREATE DATABASE my_ad_db;
+   ```
+
+2. **Set up environment variables**
+   ```bash
+   cp .env.example .env
+   ```
+
+   Required environment variables:
+   ```env
+   DATABASE_URL=postgresql://user:password@localhost:5432/my_ad_db
+   
+   # NextAuth
+   NEXTAUTH_SECRET=your_secret_here
+   NEXTAUTH_URL=http://localhost:3000
+   
+   # Google OAuth
+   GOOGLE_CLIENT_ID=your_google_client_id
+   GOOGLE_CLIENT_SECRET=your_google_client_secret
+   
+   # Email
+   RESEND_API_KEY=your_resend_api_key
+   
+   # AI Services
+   GOOGLE_GENERATIVE_AI_API_KEY=your_google_ai_key
+   ```
+
+3. **Initialize database**
+   ```bash
+   npx prisma migrate dev
+   ```
+
+### Running the Application
+
+```bash
+# Start development server
+npm run dev
+```
+
+Visit [http://localhost:3000](http://localhost:3000) to access the application.
+
+## API Testing
+
+The repository includes a complete Postman collection for API testing and documentation.
+
+### Setup Instructions
+
+1. Open **Postman Desktop App**
+2. Click **Import**
+3. Select `AdPlatform.postman_collection.json` from the repository
+4. The "AdPlatform API" collection will be available with all endpoints
+
+### Authentication for Protected Routes
+
+To test authenticated endpoints:
+
+1. Log in through the web interface at `http://localhost:3000`
+2. Postman Desktop will automatically use your browser's session cookie
+3. Execute protected route tests directly from the collection
+
+## Project Structure
+
+```
+ad-platform-demo/
+├── app/                    # Next.js app directory
+│   ├── api/               # API routes
+│   └── (pages)/           # Page components
+├── components/            # React components
+├── lib/                   # Utility functions
+├── prisma/               # Database schema
+├── public/               # Static assets
+└── AdPlatform.postman_collection.json
+```
+
+## API Endpoints
+
+| Endpoint | Method | Description | Auth Required |
+|----------|--------|-------------|---------------|
+| `/api/auth/signup` | POST | Create new account | No |
+| `/api/auth/signin` | POST | Login | No |
+| `/api/check-user` | POST | Verify credentials | No |
+| `/api/ads` | GET | Fetch all ads | No |
+| `/api/ads` | POST | Create new ad | Yes |
+| `/api/ads/:id` | DELETE | Delete ad | Yes (owner) |
+| `/api/enhance-ad` | POST | AI content enhancement | Yes |
+| `/api/generate-image` | POST | AI image generation | Yes |
+
+## Development
+
+```bash
+# Run development server
+npm run dev
+
+# Run database migrations
 npx prisma migrate dev
+
+# Open Prisma Studio
+npx prisma studio
+
+# Build for production
+npm run build
+
+# Start production server
+npm start
+```
+
+## Contributing
+
+Contributions are welcome! Please feel free to submit a Pull Request.
+
+## License
+
+This project is available for educational and portfolio purposes.
+
+## Contact
+
+For questions or feedback, please open an issue on GitHub.
+
+---
+
+**Built with ❤️ using Next.js and Google AI**
