@@ -14,7 +14,7 @@ AdPlatform is a production-ready web application that combines modern web techno
 
 | Main Feed | AI Enhancement | Final Post |
 |-----------|----------------|------------|
-| ![Feed](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%201.jpg) | ![Creation](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%202.png) | ![Post](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%203.jpg) |
+| ![Feed](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%201.png) | ![Creation](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%202.png) | ![Post](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%203.png) |
 
 The platform features a clean, intuitive interface with real-time AI content generation and seamless post management.
 
