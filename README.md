@@ -14,7 +14,7 @@ A short video demonstrating the live, running product:
 
 ### Main Ad Feed
 The main page displays a clean, scrollable feed of all user-posted ads, sorted by newest first.
-![Main Ad Feed](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%201.jpg)
+![Main Ad Feed](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%201.png)
 
 ### AI-Powered Ad Creation
 A modal form allows users to create new ads, with on-demand AI features to enhance their post.
@@ -22,7 +22,7 @@ A modal form allows users to create new ads, with on-demand AI features to enhan
 
 ### Final Post Example
 A finished post showing the user's image, AI-enhanced title, AI-generated description, and AI-generated hashtags.
-![Final Post Example](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%203.jpg)
+![Final Post Example](https://raw.githubusercontent.com/Muhammedbeig/ad-platform-demo/main/Screenshot%203.png)
 
 ---
 
