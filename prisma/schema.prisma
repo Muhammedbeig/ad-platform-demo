@@ -1,0 +1,155 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.lyd/prisma-schema
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+// ======================================
+//  Authentication Models
+// ======================================
+
+model User {
+  id            String    @id @default(cuid())
+  name          String?
+  email         String?   @unique // Made nullable for full PrismaAdapter compatibility
+  emailVerified DateTime?
+  passwordHash  String?   // For email/password login
+  image         String?
+
+  // For Google Sign-In (OAuth)
+  accounts Account[]
+
+  // --- ADDED FOR NEXTAUTH ADAPTER ---
+  sessions Session[]
+
+  // --- ADDED FOR CUSTOM EMAIL VERIFICATION ---
+  verificationToken EmailVerificationToken?
+
+  // Relation: A User can post many Ads
+  ads Ad[]
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+// Model for OAuth providers like Google
+model Account {
+  id                String  @id @default(cuid())
+  userId            String
+  type              String
+  provider          String
+  providerAccountId String
+  refresh_token     String? @db.Text
+  access_token      String? @db.Text
+  expires_at        Int?
+  token_type        String?
+  scope             String?
+  id_token          String? @db.Text
+  session_state     String?
+
+  user User @relation(fields: [userId], references: [id], onDelete: Cascade)
+
+  @@unique([provider, providerAccountId])
+}
+
+// --- ADDED: STANDARD NEXTAUTH SESSION MODEL ---
+// Required by PrismaAdapter
+model Session {
+  id           String   @id @default(cuid())
+  sessionToken String   @unique
+  userId       String
+  expires      DateTime
+  user         User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// --- ADDED: STANDARD NEXTAUTH VERIFICATION TOKEN MODEL ---
+// Required by PrismaAdapter for magic links (even if we don't use them)
+model VerificationToken {
+  identifier String
+  token      String   @unique
+  expires    DateTime
+
+  @@unique([identifier, token])
+}
+
+// --- ADDED: CUSTOM EMAIL VERIFICATION TOKEN MODEL ---
+// For our specific sign-up flow
+model EmailVerificationToken {
+  id      String   @id @default(cuid())
+  token   String   @unique
+  expires DateTime
+
+  // Relation fields
+  userId String   @unique
+  user   User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+}
+
+// ======================================
+//  Ad Post Models
+// (Your models are perfect, no changes needed)
+// ======================================
+
+model Ad {
+  id          String   @id @default(cuid())
+  title       String
+  description String
+  price       Float
+
+  // Category dropdowns
+  category    Category
+  subCategory SubCategory
+
+  // Media (image/video)
+  // We store the file path to the local storage
+  mediaUrls String[] @default([])
+
+  // AI Generated Content
+  aiDescription String?
+  aiHashtags    String[] @default([])
+  aiImageUrl    String?
+
+  // Relation: Each Ad belongs to one User
+  authorId String
+  author   User   @relation(fields: [authorId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@index([authorId])
+  // Sort by newest first
+  @@index([createdAt])
+}
+
+// Enums for the dropdowns
+// We can add more categories later
+enum Category {
+  ELECTRONICS
+  VEHICLES
+  PROPERTY
+  JOBS
+}
+
+enum SubCategory {
+  // Electronics
+  PHONES
+  LAPTOPS
+  CAMERAS
+
+  // Vehicles
+  CARS
+  MOTORCYCLES
+
+  // Property
+  HOUSE_FOR_RENT
+  HOUSE_FOR_SALE
+
+  // Jobs
+  FULL_TIME
+  PART_TIME
+}

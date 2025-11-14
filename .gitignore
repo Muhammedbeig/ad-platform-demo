@@ -1,0 +1,15 @@
+# Node.js
+/node_modules
+/.next
+
+# Environment files
+.env
+.env.local
+
+# Uploads
+/public/uploads
+
+# Large files & Videos
+*.mp4
+*.mov
+*.mkv
